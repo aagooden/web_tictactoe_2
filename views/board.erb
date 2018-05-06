@@ -1,0 +1,67 @@
+
+<%images = session[:images]%>
+
+<% quips = ["Think OUTSIDE the box!", "You are a Tic Tac Toe MASTER!!!", "May the FORK be with you!", "Be the board!", "Take no prisoners!!!", "You are ROCKING it!!", "Hello...Play in a blank space!", "It's YOUR turn Dude!", "Something to prove?  Make a move!!!"]%>
+
+<%if session[:game].turn == true%>
+<%current_player = session[:player1]%>
+<%else%>
+<%current_player = session[:player2]%>
+<%end%>
+
+<h2><%=current_player%>: It's your turn.</h2>
+<h2><%=quips.sample%></h2>
+
+<div class="grid-container">
+  <div class="item1" id="grid_1" onclick="playerMove(1)"
+    style="border-bottom: 5px solid white; border-right: 5px solid white;" >
+    <img src="<%= images[0] %>" style="width:100px;height:100px;">
+  </div>
+
+  <div class="item2" onclick="playerMove(2)"
+    style="border-bottom: 5px solid white;">
+    <img src="<%= images[1] %>" style="width:100px;height:100px;">
+  </div>
+
+  <div class="item3" onclick="playerMove(3)"
+    style="border-bottom: 5px solid white;border-left: 5px solid white;">
+    <img src="<%= images[2] %>" style="width:100px;height:100px;">
+  </div>
+
+  <div class="item4" onclick="playerMove(4)"
+    style="border-bottom: 5px solid white; border-right: 5px solid white;">
+    <img src="<%= images[3] %>" style="width:100px;height:100px;">
+  </div>
+
+  <div class="item5" onclick="playerMove(5)"
+    style="border-bottom: 5px solid white;">
+    <img src="<%= images[4] %>" style="width:100px;height:100px;">
+  </div>
+
+  <div class="item6" onclick="playerMove(6)"
+    style="border-bottom: 5px solid white;border-left: 5px solid white;">
+    <img src="<%= images[5] %>" style="width:100px;height:100px;">
+  </div>
+
+  <div class="item7" onclick="playerMove(7)"
+  style="border-right: 5px solid white;">
+    <img src="<%= images[6] %>" style="width:100px;height:100px;">
+  </div>
+
+  <div class="item8" onclick="playerMove(8)">
+    <img src="<%= images[7] %>" style="width:100px;height:100px;">
+  </div>
+
+  <div class="item9" onclick="playerMove(9)"
+    style="border-left: 5px solid white;">
+    <img src="<%= images[8] %>" style="width:100px;height:100px;">
+  </div>
+
+</div>
+
+
+<script>
+  function playerMove(move) {
+    window.location = "/move?move=" + move;
+  }
+</script>
