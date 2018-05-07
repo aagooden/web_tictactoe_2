@@ -24,27 +24,4 @@ class Computer
     computer_move = @level.move(board_state, overall_status, @piece, @opponent_piece)
   end
 
-
-
-
-
-  # puts "HITTING THE MOVE FUNCTION"
-  # move = ""
-  # board = Array.new
-  # if self.piece == "O"
-  #   @opponent_piece = "X"
-  # else
-  #   @opponent_piece = "O"
-  # end
-  # #if the following routine is not performed, any changes in a variable set to @board.state will subsequently change @board.state...
-  # # This is essentially insulating @board.state from changes
-  # board_state.each do |position|
-  #   board.push(position)
-  # end
-
-
-
-
-
-
 end
