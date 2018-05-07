@@ -3,19 +3,21 @@ class Game
 
   attr_accessor :current_player, :player1, :player2
 
-  def initialize(player1_name, player2_name, difficulty, turn)
+  def initialize(player1_name, player2_name, difficulty, turn, computer1_level, computer2_level)
       @@board = Board.new
 
-      @player1 = Human.new(player1_name, "X")
+      if player1_name == "Computer1"
+        @player1 = Computer.new(player1_name, "X", "O", difficulty)
+      else
+        @player1 = Human.new(player1_name, "X")
+      end
 
       if player2_name == "Computer"
-
         @player2 = Computer.new(player2_name, "O", "X", difficulty)
-
-
+      elsif player2_name == "Computer2"
+        @player2 = Computer.new(player1_name, "O", "X", computer2_level)
       else
         @player2 = Human.new(player2_name, "O")
-
       end
 
       if turn == "player1"

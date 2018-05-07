@@ -13,7 +13,25 @@ enable :sessions
 
 
 get "/" do
-	erb :welcome
+	erb :setup
+end
+
+post "/welcome" do
+	if params[:game_type] == "computer"
+		erb :difficulty
+	else
+		erb :welcome
+	end
+end
+
+post '/computer_play' do
+	# session[:number_of_players] = params[:number_of_players]
+	session[:player1_name] = "Computer1"
+	session[:player2_name] = "Computer2"
+	session[:computer1_level] = params[:difficulty_selection1].to_i
+	session[:computer2_level] = params[:difficulty_selection2].to_i
+
+	redirect "/new_computer_game"
 end
 
 
@@ -123,4 +141,9 @@ get "/board" do
 	end
 	session[:images] = images
 	erb :board
+end
+
+get "/new_computer_game" do
+	@@game = Game.new(session[:player1_name], session[:player2_name], session[:difficulty], "player1", session[:computer1_level], session[:computer2_level])
+	redirect "move"
 end
