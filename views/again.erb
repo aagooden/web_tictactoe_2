@@ -4,8 +4,8 @@
 <h2><%=session[:player2]%> - You are O's</h2><br>
 <h2>Who wants to go first?</h2><br>
 <form class="" action="again" method="post">
-  <input type="radio" name="first_move" value="player1" required><%=session[:player1]%><br>
+  <input type="radio" name="first_move" value="player1" required><%=session[:player1_name]%><br>
   <p>OR</p>
-  <input type="radio" name="first_move" value="player2" required><%=session[:player2]%><br><br>
+  <input type="radio" name="first_move" value="player2" required><%=session[:player2_name]%><br><br>
   <input type="submit" name="" value="Start Game">
 </form>

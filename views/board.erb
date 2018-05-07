@@ -1,15 +1,16 @@
 
+
 <%images = session[:images]%>
 
 <% quips = ["Think OUTSIDE the box!", "You are a Tic Tac Toe MASTER!!!", "May the FORK be with you!", "Be the board!", "Take no prisoners!!!", "You are ROCKING it!!", "Hello...Play in a blank space!", "It's YOUR turn Dude!", "Something to prove?  Make a move!!!"]%>
 
-<%if session[:game].turn == true%>
+<%if @@game.turn == true%>
 <%current_player = session[:player1]%>
 <%else%>
 <%current_player = session[:player2]%>
 <%end%>
 
-<h2><%=current_player%>: It's your turn.</h2>
+<h2><%=@@game.current_player.name%>: It's your turn.</h2>
 <h2><%=quips.sample%></h2>
 
 <div class="grid-container">
@@ -62,6 +63,6 @@
 
 <script>
   function playerMove(move) {
-    window.location = "/move?move=" + move;
+    window.location = "/update_game_status?move=" + move;
   }
 </script>

@@ -1,62 +1,54 @@
 <%images = session[:images]%>
 
-<br><br><br>
+<h2>The Computer has played...it's up to you now...</h2>
+
+<form class="" action="" method="post">
+
+</form>
+
 <div class="grid-container">
-  <div class="item1" id="grid_1" onclick="playerMove(1)"
+  <div class="item1" id="grid_1"
     style="border-bottom: 5px solid white; border-right: 5px solid white;" >
     <img src="<%= images[0] %>" style="width:100px;height:100px;">
   </div>
 
-  <div class="item2" onclick="playerMove(2)"
+  <div class="item2"
     style="border-bottom: 5px solid white;">
     <img src="<%= images[1] %>" style="width:100px;height:100px;">
   </div>
 
-  <div class="item3" onclick="playerMove(3)"
+  <div class="item3"
     style="border-bottom: 5px solid white;border-left: 5px solid white;">
     <img src="<%= images[2] %>" style="width:100px;height:100px;">
   </div>
 
-  <div class="item4" onclick="playerMove(4)"
+  <div class="item4"
     style="border-bottom: 5px solid white; border-right: 5px solid white;">
     <img src="<%= images[3] %>" style="width:100px;height:100px;">
   </div>
 
-  <div class="item5" onclick="playerMove(5)"
+  <div class="item5"
     style="border-bottom: 5px solid white;">
     <img src="<%= images[4] %>" style="width:100px;height:100px;">
   </div>
 
-  <div class="item6" onclick="playerMove(6)"
+  <div class="item6"
     style="border-bottom: 5px solid white;border-left: 5px solid white;">
     <img src="<%= images[5] %>" style="width:100px;height:100px;">
   </div>
 
-  <div class="item7" onclick="playerMove(7)"
+  <div class="item7"
   style="border-right: 5px solid white;">
     <img src="<%= images[6] %>" style="width:100px;height:100px;">
   </div>
 
-  <div class="item8" onclick="playerMove(8)">
+  <div class="item8" >
     <img src="<%= images[7] %>" style="width:100px;height:100px;">
   </div>
 
-  <div class="item9" onclick="playerMove(9)"
+  <div class="item9"
     style="border-left: 5px solid white;">
     <img src="<%= images[8] %>" style="width:100px;height:100px;">
   </div>
 
 </div>
-
-
-<h1><%= session[:message1] %></h1>
-
-<h2>The score is:</h2><br>
-
-<h2><%=session[:player1_name]%>: <%=@@game.player1.score%></h2>
-
-<h2><%=session[:player2_name]%>: <%=@@game.player2.score%></h2><br>
-
-<form class="" action="again" method="get">
-  <input type="submit" name="" value="Play Again">
-</form>
