@@ -7,7 +7,7 @@ class Game
       @@board = Board.new
 
       if player1_name == "Computer1"
-        @player1 = Computer.new(player1_name, "X", "O", difficulty)
+        @player1 = Computer.new(player1_name, "X", "O", computer1_level)
       else
         @player1 = Human.new(player1_name, "X")
       end
