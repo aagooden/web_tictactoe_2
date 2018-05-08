@@ -154,7 +154,6 @@ class Unbeatable
 
             temp_overall.each do |group_3|
               if group_3.count(piece) == 2
-                puts "This is group_3 #{group_3}"
                   array = group_3 - [piece]
                     test_move = array[0]
               end

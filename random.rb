@@ -2,7 +2,7 @@ class Random
 
 
   def move(board_state, overall_status, piece, opponent_piece)
-    puts "HITTING RANDOM MOVE FUNCTION"
+    # puts "HITTING RANDOM MOVE FUNCTION"
   #This function picks a random empty spot on the board and plays there
     move = ""
     # # puts "WELCOME TO RANDOM MOVE...ENJOY YOUR STAY!"
