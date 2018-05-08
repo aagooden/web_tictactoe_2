@@ -118,7 +118,6 @@ class Unbeatable
       if num > 1
         possible.push(x)
       end
-      puts "$$$$$$$$$$Here are the possibles #{possible}"
     end
 
     #If there is only one possible fork for the opponent, the player should block it.
@@ -129,28 +128,11 @@ class Unbeatable
     elsif possible.length > 1
       #the following function call finds possible two_in_a_row moves
       two_in_a_row = create_two_in_a_row(overall_status, move, piece, opponent_piece)
-      puts "Here is two_in_a_row #{two_in_a_row}"
     else
       return move
     end
 
     # Otherwise, the player should block any forks in any way that simultaneously allows them to create two in a row...
-    #This is accomplished by deleting the fork_block moves from the possible moves below
-    puts "This is possible from forkblock #{possible}"
-    # possible.each do |num|
-    #   if two_in_a_row.include?(num)
-    #     # puts "This is two_in_a_row when comparing to possible fork_block moves #{two_in_a_row}"
-    #     two_in_a_row_block.push(num)
-    #   end
-    # end
-    # puts "This is two_in_a_row_block from forkblock #{two_in_a_row_block}"
-    # puts "This is two_in_a_row before deleting two_in_a_row_block #{two_in_a_row}"
-    # if two_in_a_row_block.length > 1
-    #   two_in_a_row = two_in_a_row - two_in_a_row_block
-    # end
-    puts "This is two_in_a_row  #{two_in_a_row}"
-    #This is two_in_a_row without possible fork_block moves
-    #if there are more than one possibility left, just pick one randomly
 
     test_move = ""
     two_in_a_row.each do |position|
@@ -159,8 +141,6 @@ class Unbeatable
         temp_board.push(x)
       end
           temp_board[position-1] = piece
-
-          puts "This is temp_board with test piece #{temp_board}"
 
           temp_overall = []
           combos = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [6,4,2]]
@@ -172,8 +152,6 @@ class Unbeatable
                 temp_overall.push(temp)
             end
 
-            puts "This is temp_overall #{temp_overall}"
-
             temp_overall.each do |group_3|
               if group_3.count(piece) == 2
                 puts "This is group_3 #{group_3}"
@@ -182,12 +160,9 @@ class Unbeatable
               end
             end
 
-            puts "this is test_move #{test_move}"
-
       if possible.include?(test_move)
         two_in_a_row = two_in_a_row - [position]
       end
-      puts "This is twoinarow #{two_in_a_row}"
 
     end
 

@@ -13,6 +13,7 @@ enable :sessions
 
 
 get "/" do
+	session.clear
 	erb :setup
 end
 
