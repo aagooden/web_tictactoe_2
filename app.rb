@@ -49,25 +49,29 @@ end
 
 get '/move' do
 	# session[:current_move] = params[:move]
-	if @@game.current_player.class == Computer
+	if @@game.current_player.name == "Computer1" || @@game.current_player.name == "Computer2"
+		loop do
+			puts "%%%%%%%%%%%%%%%%%%%%%%%%%%%$$$$$$$$$$$$$$$$$ IN THE LOOP"
+			session[:move] = @@game.current_player.move(@@game.board_state, @@game.overall_status)
+			puts "Session move = #{session[:move]}"
+
+			session[:game_status] = @@game.update_game_status(session[:move])
+
+			case session[:game_status]
+			when "winner"
+				redirect "/winner"
+			when "tie"
+				redirect "/winner"
+			when "no_dice"
+				redirect "/no_dice"
+			else
+			end
+		end
+
+	elsif @@game.current_player.class == Computer
 		session[:move] = @@game.current_player.move(@@game.board_state, @@game.overall_status)
 		redirect "/update_game_status"
-	elsif @@game.current_player.name == "Computer1" || @@game.current_player.name == "Computer2"
-		session[:move] = @@game.current_player.move(@@game.board_state, @@game.overall_status)
 
-		#This code is
-		session[:game_status] = @@game.update_game_status(session[:move])
-
-		case session[:game_status]
-		when "winner"
-			redirect "/winner"
-		when "tie"
-			redirect "/winner"
-		when "no_dice"
-			redirect "/no_dice"
-		else
-			redirect "/move"
-		end
 
 	else
 		redirect "/board"
