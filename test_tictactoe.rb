@@ -361,20 +361,22 @@ class Tictactoe_test < Minitest::Test
 
 	def test_computer_VS_computer
 		for x in (1..10) do
-			game = Game.new("Computer1", "Computer2", 1, "player2", 1, 1)
+			game = Game.new("Computer1", "Computer2", 1, "player1", 1, 1)
 			puts "$$$$$$$$$$$$$$$$$$$$$$$$$"
 			loop do
 				cheese = game.current_player.move(game.board_state, game.overall_status)
 				puts "current player is #{game.current_player.name}"
+				puts "The turn is #{game.turn}"
 				status = game.update_game_status(cheese)
 
 				if status == "winner"
 					puts "It's a winner"
 					break
-				elsif status = "tie"
+				end
+
+				if status = "tie"
 					puts "It's a tie"
 					break
-				else
 				end
 			end
 			puts "Playing game number #{x}"
