@@ -128,14 +128,14 @@ end
 
 post "/again" do
 		session[:first_move] = params[:first_move]
-		if session[:player1_name] == "Computer1"
+		# if session[:player1_name] == "Computer1"
 			@@game.play_again(session[:first_move])
 			redirect "move"
-		else
-			# @@game = Game.new(session[:player1_name], session[:player2_name], session[:difficulty], params[:first_move], "placeholder", "placeholder")
-			@@game.play_again(session[:first_move])
-			redirect "move"
-		end
+		# else
+		# 	# @@game = Game.new(session[:player1_name], session[:player2_name], session[:difficulty], params[:first_move], "placeholder", "placeholder")
+		# 	@@game.play_again(session[:first_move])
+		# 	redirect "move"
+		# end
 end
 
 get "/board" do
@@ -155,7 +155,7 @@ get "/board" do
 end
 
 get "/new_computer_game" do
-	@@game = Game.new(session[:player1_name], session[:player2_name], session[:difficulty], "player1", session[:computer1_level], session[:computer2_level])
+	@@game = Game.new(session[:player1_name], session[:player2_name], session[:difficulty], session[:first_move], session[:computer1_level], session[:computer2_level])
 
 	redirect "move"
 end

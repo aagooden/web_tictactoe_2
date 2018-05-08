@@ -15,7 +15,7 @@ class Game
       if player2_name == "Computer"
         @player2 = Computer.new(player2_name, "O", "X", difficulty)
       elsif player2_name == "Computer2"
-        @player2 = Computer.new(player1_name, "O", "X", computer2_level)
+        @player2 = Computer.new(player2_name, "O", "X", computer2_level)
       else
         @player2 = Human.new(player2_name, "O")
       end

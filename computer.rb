@@ -5,7 +5,7 @@ class Computer
 
   def initialize(name, piece, opponent_piece, difficulty)
       @piece = piece
-      @name = "Computer"
+      @name = name
       @score = 0
       @opponent_piece = opponent_piece
       @level = [Random.new, Sequential.new, Unbeatable.new][difficulty - 1]
