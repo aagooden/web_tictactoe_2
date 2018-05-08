@@ -1,6 +1,6 @@
 class Computer
 
-
+@score
   attr_accessor :name, :piece
 
   def initialize(name, piece, opponent_piece, difficulty)
@@ -9,7 +9,6 @@ class Computer
       @score = 0
       @opponent_piece = opponent_piece
       @level = [Random.new, Sequential.new, Unbeatable.new][difficulty - 1]
-      puts "&*********&&&&&&&&&&**********&&&&&&&The level is #{@level}"
   end
 
   def increase_score

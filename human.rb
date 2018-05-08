@@ -1,8 +1,9 @@
 class Human
-
+  @score
     attr_accessor :name, :piece
 
     def initialize(name, piece)
+
         @piece = piece
         @name = name
         @score = 0

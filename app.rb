@@ -30,7 +30,6 @@ post '/computer_play' do
 	session[:player2_name] = "Computer2"
 	session[:computer1_level] = params[:difficulty_selection1].to_i
 	session[:computer2_level] = params[:difficulty_selection2].to_i
-
 	redirect "/new_computer_game"
 end
 
@@ -43,16 +42,8 @@ post '/play' do
 	if session[:player2_name] == nil
 		session[:player2_name] = "Computer"
 	end
-	redirect "/again"
+	redirect "/new_game"
 end
-
-
-# get '/game' do
-# 	@@game = Game.new(session[:number_of_players], session[:player1_name], session[:player2_name], session[:difficulty])
-# 	# session[:board_state] = @@game.board_state
-# 	redirect "/again"
-# 	# erb :board
-# end
 
 
 get '/move' do
@@ -114,6 +105,21 @@ get "/winner" do
 	erb :winner
 end
 
+get "/new_game" do
+	erb :new_game
+end
+
+post "/new_game" do
+		if session[:player1_name] == "Computer1"
+			erb :difficulty
+		else
+			@@game = Game.new(session[:player1_name], session[:player2_name], session[:difficulty], params[:first_move], "placeholder", "placeholder")
+			# @@game.play_again(turn)
+			# session[:board_state] = @@game.board_state
+			redirect "move"
+		end
+end
+
 
 get "/again" do
 	erb :again
@@ -121,10 +127,15 @@ end
 
 
 post "/again" do
-		@@game = Game.new(session[:player1_name], session[:player2_name], session[:difficulty], params[:first_move])
-		# @@game.play_again(turn)
-		# session[:board_state] = @@game.board_state
-		redirect "move"
+		session[:first_move] = params[:first_move]
+		if session[:player1_name] == "Computer1"
+			@@game.play_again(session[:first_move])
+			redirect "move"
+		else
+			# @@game = Game.new(session[:player1_name], session[:player2_name], session[:difficulty], params[:first_move], "placeholder", "placeholder")
+			@@game.play_again(session[:first_move])
+			redirect "move"
+		end
 end
 
 get "/board" do
@@ -145,5 +156,6 @@ end
 
 get "/new_computer_game" do
 	@@game = Game.new(session[:player1_name], session[:player2_name], session[:difficulty], "player1", session[:computer1_level], session[:computer2_level])
+
 	redirect "move"
 end

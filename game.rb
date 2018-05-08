@@ -65,43 +65,15 @@ class Game
   end
 
 
-    # player = ""
-
-    # if @turn == true
-    #     player = @player1
-    # else
-    #     player = @player2
-    #
-    # end
-
-		# if player.class == Computer
-    #   position =
-    #     [player.random_move(@board.state, @player2.piece, @player1.piece),
-    #     player.sequential_move(@board.state, @player2.piece, @player1.piece),
-    #     player.move(@board.state)][@difficulty.to_i - 1]
-		# else
-    #   position = current_move
-    #   position = position.to_i
-		# end
-  #
-  #   @board.change_state(player.piece, position)
-  #   player.update_positions(position)
-  #
-  #   @turn = !@turn
-  #
-  #   if player.check_winner == true
-  #     player.increase_score
-  #     return player.name, @player1.name, @player1.score, @player2.name, @player2.score, "winner"
-  #   elsif @board.check_tie
-  #     return player.name, @player1.name, @player1.score, @player2.name, @player2.score, "tie"
-  #   end
-  #
-  #   return player.name, @player1.name, @player1.score, @player2.name, @player2.score, "none"
-  # end
-
   def play_again(turn)
     @@board = Board.new
-    @@board.state = [1,2,3,4,5,6,7,8,9]
+    @@board.reset
+    @turn = turn
+    if turn == "player1" || turn == "Computer1"
+      @current_player = @player1
+    else
+      @current_player = @player2
+    end
   end
 
 end
