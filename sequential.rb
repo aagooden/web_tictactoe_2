@@ -1,6 +1,7 @@
 class Sequential
 
   def move(board_state, overall_status, piece, opponent_piece)
+    puts "HITTING SEQUENTIAL MOVE FUNCTION"
     # move = ""
     # board = board_state
     # overall_status = []

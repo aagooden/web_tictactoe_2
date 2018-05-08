@@ -11,6 +11,7 @@ class Game
       else
         @player1 = Human.new(player1_name, "X")
       end
+      puts "Player1 is #{@player1}"
 
       if player2_name == "Computer"
         @player2 = Computer.new(player2_name, "O", "X", difficulty)
@@ -19,6 +20,7 @@ class Game
       else
         @player2 = Human.new(player2_name, "O")
       end
+      puts "Player2 is #{@player2}"
 
       if turn == "player1"
         @turn = "player1"
@@ -59,6 +61,8 @@ class Game
     elsif @@board.check_tie
       return "tie"
     else
+      puts "It should be changing here"
+      puts "@current_player is #{@current_player}"
       @current_player = @current_player ==  @player1 ? @player2 : @player1
       @turn = @turn == "player1" ? "player2" : "player1"
     end

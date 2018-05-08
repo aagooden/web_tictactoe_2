@@ -51,6 +51,7 @@ get '/move' do
 	# session[:current_move] = params[:move]
 	if @@game.current_player.class == Computer
 		session[:move] = @@game.current_player.move(@@game.board_state, @@game.overall_status)
+		sleep(0.1)
 		redirect "/update_game_status"
 	else
 		redirect "/board"
