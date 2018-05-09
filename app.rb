@@ -170,9 +170,15 @@ post "/again" do
 		first_move = params[:first_move]
 		player1_name = params[:player1_name]
 		player2_name = params[:player2_name]
-		# if player1_name == "Computer1"
+		if player2_name == "Computer2" 
+			difficulty = session[:game].player2.level.to_s
+		elsif player2_name == "Computer"
+				difficulty = session[:game].player2.level.to_s
+		else
+			difficulty = "placeholder"
+		end
 			session[:game].play_again(first_move)
-			redirect "/move?player1_name=" + player1_name + "&player2_name=" + player2_name + "&difficulty=" + session[:game].player2.level.to_s + "&first_move=" + first_move		# else
+			redirect "/move?player1_name=" + player1_name + "&player2_name=" + player2_name + "&difficulty=" + difficulty + "&first_move=" + first_move		# else
 end
 
 get "/board" do
