@@ -1,14 +1,14 @@
 class Computer
 
 @score
-  attr_accessor :name, :piece
+  attr_accessor :name, :piece, :opponent_piece, :level
 
   def initialize(name, piece, opponent_piece, difficulty)
       @piece = piece
       @name = name
       @score = 0
       @opponent_piece = opponent_piece
-      @level = [Random.new, Sequential.new, Unbeatable.new][difficulty.to_i - 1]
+      @level = difficulty
   end
 
   def increase_score

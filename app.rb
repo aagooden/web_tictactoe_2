@@ -84,8 +84,9 @@ get '/move' do
 	# session[:current_move] = params[:move]
 	if session[:game].current_player.name == "Computer1" || session[:game].current_player.name == "Computer2"
 		loop do
-			current_move = session[:game].current_player.move(session[:game].board_state, session[:game].overall_status)
-			puts "Session move = #{current_move}"
+			level = [Random.new, Sequential.new, Unbeatable.new][session[:game].current_player.level.to_i - 1]
+			# current_move = session[:game].current_player.move(session[:game].board_state, session[:game].overall_status)
+			current_move = level.move(session[:game].board_state, session[:game].overall_status, session[:game].current_player.piece, session[:game].current_player.opponent_piece)
 
 			game_status = session[:game].update_game_status(current_move)
 
@@ -101,9 +102,10 @@ get '/move' do
 		end
 
 	elsif session[:game].current_player.class == Computer
-		current_move = session[:game].current_player.move(session[:game].board_state, session[:game].overall_status)
+		level = [Random.new, Sequential.new, Unbeatable.new][difficulty.to_i - 1]
+		# current_move = session[:game].current_player.move(session[:game].board_state, session[:game].overall_status)
+		current_move = level.move(session[:game].board_state, session[:game].overall_status, session[:game].current_player.piece, session[:game].current_player.opponent_piece)
 		redirect "/update_game_status?player1_name=" + player1_name + "&player2_name=" + player2_name + "&difficulty=" + difficulty + "&current_move=" + current_move.to_s
-
 
 	else
 		redirect "/board?player1_name=" + player1_name + "&player2_name=" + player2_name + "&difficulty=" + difficulty
@@ -148,24 +150,11 @@ get "/winner" do
 	player2_name = params[:player2_name]
 	difficulty = params[:difficulty]
 	game_status = params[:game_status]
-	# if game_status == "winner"
-	# 	session[:message1] = "Way to go #{session[:game].current_player.name}, YOU WIN!!"
-	# else
-	# 	session[:message1] = "Better luck next time...IT'S A TIE!"
-	# end
-
-	# creates an array of images to use in constructing the board
-	# images = []
-	# session[:game].board_state.each do |position|
-	# 	if position.is_a?Integer
-	# 	  images.push("blank.jpg")
-	# 	elsif position == "X"
-	# 	  images.push("x.png")
-	# 	elsif position == "O"
-	# 	  images.push("o.png")
-	# 	end
-	# end
-	# session[:images] = images
+	if game_status == "winner"
+		session[:message1] = "Way to go #{session[:game].current_player.name}, YOU WIN!!"
+	else
+		session[:message1] = "Better luck next time...IT'S A TIE!"
+	end
 	erb :winner, locals: {player1_name: player1_name, player2_name: player2_name, difficulty: difficulty, game_status: game_status }
 end
 
@@ -183,28 +172,13 @@ post "/again" do
 		player2_name = params[:player2_name]
 		# if player1_name == "Computer1"
 			session[:game].play_again(first_move)
-			redirect "/move?player1_name=" + player1_name + "&player2_name=" + player2_name + "&difficulty=" + "placeholder" + "&first_move=" + first_move		# else
-		# 	# session[:game] = session[:game].new(player1_name, player2_name, difficulty, params[:first_move], "placeholder", "placeholder")
-		# 	session[:game].play_again(first_move)
-		# 	redirect "move"
-		# end
+			redirect "/move?player1_name=" + player1_name + "&player2_name=" + player2_name + "&difficulty=" + session[:game].player2.level.to_s + "&first_move=" + first_move		# else
 end
 
 get "/board" do
 	player1_name = params[:player1_name]
 	player2_name = params[:player2_name]
 	difficulty = params[:difficulty]
-	# creates an array of images to use in constructing the board
-	# images = []
-	# session[:game].board_state.each do |position|
-	# 	if position.is_a?Integer
-	# 		images.push("blank.jpg")
-	# 	elsif position == "X"
-	# 		images.push("x.png")
-	# 	elsif position == "O"
-	# 		images.push("o.png")
-	# 	end
-	# end
-	# session[:images] = images
+
 	erb :board, locals: {player1_name: player1_name, player2_name: player2_name, difficulty: difficulty}
 end

@@ -364,12 +364,12 @@ class Tictactoe_test < Minitest::Test
 		win_count = 0
 		for x in (1..1000) do
 			game = Game.new("Computer1", "Computer2", 1, "player2", 3, 3)
+
 			loop do
-				cheese = game.current_player.move(game.board_state, game.overall_status)
-				# puts "current player name is #{game.current_player.name}"
-				# puts "CURRENT PLAYER IS #{game.current_player}"
-				# puts "The turn is #{game.turn}"
-				status = game.update_game_status(cheese)
+				level = [Random.new, Sequential.new, Unbeatable.new][game.current_player.level.to_i - 1]
+				current_move = level.move(game.board_state, game.overall_status, game.current_player.piece, game.current_player.opponent_piece)
+
+				status = game.update_game_status(current_move)
 
 				if status == "winner"
 					win_count += 1
@@ -383,7 +383,7 @@ class Tictactoe_test < Minitest::Test
 			end
 
 		end
-		puts "The results of the unbeatable test are:"
+		puts "The results of the unbeatable VS unbeatable test are:"
 		puts "The number of ties were #{tie_count}"
 		puts "The number of wins were #{win_count}"
 	end
@@ -394,11 +394,10 @@ class Tictactoe_test < Minitest::Test
 		for x in (1..1000) do
 			game = Game.new("Computer1", "Computer2", 1, "player2", 1, 1)
 			loop do
-				cheese = game.current_player.move(game.board_state, game.overall_status)
-				# puts "current player name is #{game.current_player.name}"
-				# puts "CURRENT PLAYER IS #{game.current_player}"
-				# puts "The turn is #{game.turn}"
-				status = game.update_game_status(cheese)
+				level = [Random.new, Sequential.new, Unbeatable.new][game.current_player.level.to_i - 1]
+				current_move = level.move(game.board_state, game.overall_status, game.current_player.piece, game.current_player.opponent_piece)
+
+				status = game.update_game_status(current_move)
 
 				if status == "winner"
 					win_count += 1
@@ -412,7 +411,7 @@ class Tictactoe_test < Minitest::Test
 			end
 
 		end
-		puts "The results of the random test are:"
+		puts "The results of the random VS random test are:"
 		puts "The number of ties were #{tie_count}"
 		puts "The number of wins were #{win_count}"
 	end
@@ -423,11 +422,10 @@ class Tictactoe_test < Minitest::Test
 		for x in (1..1000) do
 			game = Game.new("Computer1", "Computer2", 1, "player2", 1, 3)
 			loop do
-				cheese = game.current_player.move(game.board_state, game.overall_status)
-				# puts "current player name is #{game.current_player.name}"
-				# puts "CURRENT PLAYER IS #{game.current_player}"
-				# puts "The turn is #{game.turn}"
-				status = game.update_game_status(cheese)
+				level = [Random.new, Sequential.new, Unbeatable.new][game.current_player.level.to_i - 1]
+				current_move = level.move(game.board_state, game.overall_status, game.current_player.piece, game.current_player.opponent_piece)
+
+				status = game.update_game_status(current_move)
 
 				if status == "winner"
 					win_count += 1
