@@ -4,7 +4,7 @@ class Game
   attr_accessor :current_player, :player1, :player2
 
   def initialize(player1_name, player2_name, difficulty, turn, computer1_level, computer2_level)
-      @@board = Board.new
+      @board = Board.new
 
       if player1_name == "Computer1"
         @player1 = Computer.new(player1_name, "X", "O", computer1_level)
@@ -32,11 +32,11 @@ class Game
   end
 
   def board_state
-    @@board.state
+    @board.state
   end
 
   def overall_status
-    @@board.overall_status
+    @board.overall_status
   end
 
 
@@ -47,16 +47,16 @@ class Game
 
   def update_game_status(move)
     # puts "TURN AT THE BEGINNING IS #{@turn}"
-    if @@board.check_position(move) == false
+    if @board.check_position(move) == false
       return "no_dice"
     else
-      @@board.change_state(@current_player.piece, move)
+      @board.change_state(@current_player.piece, move)
     end
 
-    if @@board.check_winner
+    if @board.check_winner
       @current_player.increase_score
       return "winner"
-    elsif @@board.check_tie
+    elsif @board.check_tie
       return "tie"
     else
       @current_player = @current_player ==  @player1 ? @player2 : @player1
@@ -67,8 +67,8 @@ class Game
 
 
   def play_again(turn)
-    @@board = Board.new
-    @@board.reset
+    @board = Board.new
+    @board.reset
     @turn = turn
     if turn == "player1" || turn == "Computer1"
       @current_player = @player1

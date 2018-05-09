@@ -1,4 +1,13 @@
-<%images = session[:images]%>
+<%images = []%>
+<%session[:game].board_state.each do |position|%>
+  <%if position.is_a?Integer%>
+    <%images.push("blank.jpg")%>
+  <%elsif position == "X"%>
+    <%images.push("x.png")%>
+  <%elsif position == "O"%>
+    <%images.push("o.png")%>
+  <%end%>
+<%end%>
 
 <br><br><br>
 <div class="grid-container">
@@ -49,16 +58,20 @@
 </div>
 
 
-<h1><%= session[:message1] %></h1>
+<!-- <h1><%= session[:message1] %></h1> -->
 
 <h2>The score is:</h2><br>
 
-<h2><%=session[:player1_name]%>: <%=@@game.player1.score%></h2>
+<h2><%=player1_name%>: <%=session[:game].player1.score%></h2>
 
-<h2><%=session[:player2_name]%>: <%=@@game.player2.score%></h2><br>
+<h2><%=player2_name%>: <%=session[:game].player2.score%></h2><br>
 
 <form class="" action="again" method="get">
   <input type="submit" name="" value="Play Again">
+
+  <input type="hidden" name="player1_name" value = "<%= player1_name %>">
+  <input type="hidden" name="player2_name" value = "<%= player2_name %>">
+  <!-- <input type="hidden" name="difficulty" value = "<%= difficulty %>"> -->
 </form>
 
 <form class="" action="/" method="get">

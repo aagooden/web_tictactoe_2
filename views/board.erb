@@ -1,16 +1,20 @@
 
+<%images = []%>
+<%session[:game].board_state.each do |position|%>
+  <%if position.is_a?Integer%>
+    <%images.push("blank.jpg")%>
+  <%elsif position == "X"%>
+    <%images.push("x.png")%>
+  <%elsif position == "O"%>
+    <%images.push("o.png")%>
+  <%end%>
+<%end%>
 
-<%images = session[:images]%>
 
 <% quips = ["Think OUTSIDE the box!", "You are a Tic Tac Toe MASTER!!!", "May the FORK be with you!", "Be the board!", "Take no prisoners!!!", "You are ROCKING it!!", "Hello...Play in a blank space!", "It's YOUR turn Dude!", "Something to prove?  Make a move!!!"]%>
 
-<%if @@game.turn == true%>
-<%current_player = session[:player1]%>
-<%else%>
-<%current_player = session[:player2]%>
-<%end%>
 
-<h2><%=@@game.current_player.name%>: It's your turn.</h2>
+<h2><%=session[:game].current_player.name%>: It's your turn.</h2>
 <h2><%=quips.sample%></h2>
 
 <div class="grid-container">
@@ -62,7 +66,22 @@
 
 
 <script>
-  function playerMove(move) {
-    window.location = "/update_game_status?move=" + move;
+  function playerMove(current_move) {
+
+    function getUrlVars() {
+        var vars = {};
+        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+            vars[key] = value;
+        });
+        return vars;
+    }
+
+    var player1_name = getUrlVars()["player1_name"];
+    console.log(player1_name);
+    var player2_name = getUrlVars()["player2_name"];
+    var difficulty = getUrlVars()["difficulty"];
+
+
+    window.location = "/update_game_status?current_move=" + current_move + "&player1_name=" + player1_name + "&player2_name=" + player2_name + "&difficulty=" + difficulty;
   }
 </script>

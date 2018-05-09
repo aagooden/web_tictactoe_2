@@ -8,7 +8,7 @@ class Computer
       @name = name
       @score = 0
       @opponent_piece = opponent_piece
-      @level = [Random.new, Sequential.new, Unbeatable.new][difficulty - 1]
+      @level = [Random.new, Sequential.new, Unbeatable.new][difficulty.to_i - 1]
   end
 
   def increase_score

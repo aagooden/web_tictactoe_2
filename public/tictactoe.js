@@ -17,6 +17,8 @@ function reset_two_player() {
   element.parentNode.removeChild(element);
   var element = document.getElementById("player2_name");
   element.parentNode.removeChild(element);
+  var element = document.getElementById("difficulty");
+  element.parentNode.removeChild(element);
 }
 
 
@@ -67,8 +69,16 @@ function twoPlayer() {
   player2Input.id = "player2_name";
   player2Input.placeholder = "Player 2 Name";
   player2Input.required = "required";
-  inputDiv2 = document.getElementById('two_player_div');
+  var inputDiv2 = document.getElementById('two_player_div');
   inputDiv2.appendChild(player2Input);
+
+  var difficultyInput = document.createElement("input");
+  difficultyInput.type = "hidden";
+  difficultyInput.name = "difficulty";
+  difficultyInput.value = "placeholder";
+  difficultyInput.id = "difficulty";
+  var inputDiv3 = document.getElementById('two_player_div');
+  inputDiv3.appendChild(difficultyInput);
 }
 
 
